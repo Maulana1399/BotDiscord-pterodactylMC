@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { listPlayers } = require("../services/rcon");
+const { list } = require("../services/minecraft");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -9,7 +9,7 @@ module.exports = {
     async execute(interaction) {
         try {
 
-            const result = await listPlayers();
+            const result = await list();
 
             const match = result.match(
                 /There are (\d+) of a max of (\d+) players online: ?(.*)/

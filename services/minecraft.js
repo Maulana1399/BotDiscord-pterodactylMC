@@ -1,19 +1,19 @@
-const { run } = require("./rcon");
+const { send } = require("./rcon");
 
 async function say(message) {
-    return run(`say ${message}`);
+    return await send(`say ${message}`);
 }
 
 async function list() {
-    return run("list");
+    return await send("list");
 }
 
 async function whitelist() {
-    return run("whitelist list");
+    return await send("whitelist list");
 }
 
 module.exports = {
     say,
     list,
-    whitelist
+    whitelist,
 };
