@@ -1,4 +1,5 @@
 const { Events, ActivityType } = require("discord.js");
+const { checkPlayers } = require("../services/playerMonitor");
 
 module.exports = {
     name: Events.ClientReady,
@@ -25,6 +26,12 @@ module.exports = {
             status: "online"
 
         });
+
+                setInterval(() => {
+
+            checkPlayers(client);
+
+        }, 5000);
 
     }
 
