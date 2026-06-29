@@ -1,36 +1,29 @@
 const { Events, ActivityType } = require("discord.js");
 const { checkPlayers } = require("../services/playerMonitor");
+const { connect } = require("../services/rcon");
 
 module.exports = {
     name: Events.ClientReady,
     once: true,
 
-    execute(client) {
+    async execute(client) {
 
         console.log(`✅ ${client.user.tag} is online!`);
 
+        await connect();
+
         client.user.setPresence({
-
             activities: [
-
                 {
-
                     name: "Minecraft Server",
-
                     type: ActivityType.Watching
-
                 }
-
             ],
-
             status: "online"
-
         });
 
-                setInterval(() => {
-
+        setInterval(() => {
             checkPlayers(client);
-
         }, 5000);
 
     }

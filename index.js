@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { disconnect } = require("./services/rcon");
 
 const fs = require("fs");
 const path = require("path");
@@ -23,5 +24,19 @@ for (const file of eventFiles) {
         client.on(event.name, (...args) => event.execute(...args));
     }
 }
+    process.on("SIGINT", async () => {
 
+        await disconnect();
+
+        process.exit(0);
+
+    });
+
+    process.on("SIGTERM", async () => {
+
+        await disconnect();
+
+        process.exit(0);
+
+    });
 client.login(process.env.DISCORD_TOKEN);
