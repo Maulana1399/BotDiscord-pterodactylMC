@@ -1,6 +1,7 @@
 const { Events, ActivityType } = require("discord.js");
 const { checkPlayers } = require("../services/playerMonitor");
 const { connect } = require("../services/rcon");
+const { checkServer } = require("../services/serverMonitor");
 
 module.exports = {
     name: Events.ClientReady,
@@ -24,6 +25,10 @@ module.exports = {
 
         setInterval(() => {
             checkPlayers(client);
+        }, 5000);
+
+        setInterval(() => {
+            checkServer(client);
         }, 5000);
 
     }

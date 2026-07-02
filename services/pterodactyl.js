@@ -24,6 +24,22 @@ async function getResources() {
 
 }
 
+
+// ===========================
+// server monitoring
+// ===========================
+
+async function getServerState() {
+
+    const res = await api.get(
+        `/servers/${process.env.SERVER_ID}/resources`
+    );
+
+    return res.data.attributes.current_state;
+
+}
+
+
 // ===========================
 // Power
 // ===========================
@@ -98,5 +114,7 @@ module.exports = {
     createBackup,
 
     getBackups,
+
+    getServerState,
 
 };
