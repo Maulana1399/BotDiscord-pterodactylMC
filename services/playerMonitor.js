@@ -1,4 +1,4 @@
-const { list } = require("./minecraft");
+const { list } = require("./rcon");
 
 let previousPlayers = null;
 
@@ -22,7 +22,7 @@ async function checkPlayers(client) {
 
     try {
 
-        const result = await list();
+        const result = await listPlayers();
 
         const currentPlayers = parsePlayers(result);
 
