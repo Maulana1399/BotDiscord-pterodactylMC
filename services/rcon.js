@@ -66,9 +66,14 @@ async function listPlayers() {
     return await send("list");
 }
 
+async function say(message) {
+    return await send(`say ${message}`);
+}
+
 module.exports = {
     connect,
     disconnect,
     send,
     listPlayers,
+    say,
 };

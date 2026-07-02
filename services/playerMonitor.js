@@ -1,4 +1,4 @@
-const { list } = require("./rcon");
+const { listPlayers } = require("./rcon");
 
 let previousPlayers = null;
 
