@@ -10,7 +10,7 @@ module.exports = {
 
         console.log(`✅ ${client.user.tag} is online!`);
 
-        await connect();
+        // await connect();
 
         client.user.setPresence({
             activities: [

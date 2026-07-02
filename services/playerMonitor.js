@@ -63,7 +63,9 @@ async function checkPlayers(client) {
 
     } catch (err) {
 
-        console.error(err);
+        previousPlayers = null;
+
+        console.log("Minecraft offline");
 
     }
 
