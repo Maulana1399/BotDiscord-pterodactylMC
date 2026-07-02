@@ -65,7 +65,8 @@ async function checkPlayers(client) {
 
         previousPlayers = null;
 
-        console.log("Minecraft offline");
+        console.error("Player monitor error:");
+        console.error(err);
 
     }
 
