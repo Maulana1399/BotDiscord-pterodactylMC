@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 const { getServerState } = require("./pterodactyl");
+const { sendToChannels } = require("./discord");
 
 let previousState = null;
 
@@ -43,9 +44,9 @@ async function checkServer(client) {
 
         if (currentState === previousState) return;
 
-        const channel = await client.channels.fetch(
-            process.env.SERVER_LOG_CHANNEL_ID
-        );
+        // const channel = await client.channels.fetch(
+        //     process.env.SERVER_LOG_CHANNEL_ID
+        // );
 
         const state =
             states[currentState] || {
@@ -63,7 +64,9 @@ async function checkServer(client) {
             })
             .setTimestamp();
 
-        await channel.send({
+        const channels = process.env.SERVER_LOG_CHANNEL_IDS.split(",");
+
+        await sendToChannels(client, channels, {
             embeds: [embed]
         });
 

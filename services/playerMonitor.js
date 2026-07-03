@@ -1,4 +1,5 @@
 const { listPlayers } = require("./rcon");
+const { sendToChannels } = require("./discord");
 
 let previousPlayers = null;
 
@@ -43,21 +44,43 @@ async function checkPlayers(client) {
             p => !currentPlayers.includes(p)
         );
 
+        // if (joined.length || left.length) {
+
+        //     const channel = await client.channels.fetch(
+        //         process.env.DISCORD_CHANNEL_ID
+        //     );
+
+        //     for (const player of joined) {
+        //         await channel.send(`🟢 **${player}** joined the server`);
+        //     }
+
+        //     for (const player of left) {
+        //         await channel.send(`🔴 **${player}** left the server`);
+        //     }
+
+        // }
+
         if (joined.length || left.length) {
 
-            const channel = await client.channels.fetch(
-                process.env.DISCORD_CHANNEL_ID
+        const channels = process.env.DISCORD_CHANNEL_IDS.split(",");
+
+        for (const player of joined) {
+            await sendToChannels(
+                client,
+                channels,
+                `🟢 **${player}** joined the server`
             );
-
-            for (const player of joined) {
-                await channel.send(`🟢 **${player}** joined the server`);
-            }
-
-            for (const player of left) {
-                await channel.send(`🔴 **${player}** left the server`);
-            }
-
         }
+
+        for (const player of left) {
+            await sendToChannels(
+                client,
+                channels,
+                `🔴 **${player}** left the server`
+            );
+        }
+
+    }
 
         previousPlayers = currentPlayers;
 
